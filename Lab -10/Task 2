@@ -1,0 +1,45 @@
+interface ATMService { 
+void deposit(double amount); 
+void withdraw(double amount); 
+double checkBalance(); 
+} 
+class ATM implements ATMService { 
+private double balance; 
+public ATM(double initialBalance) { 
+this.balance = initialBalance;
+  } 
+    @Override 
+    public void deposit(double amount) { 
+        if (amount > 0) { 
+            balance += amount; 
+            System.out.println("Deposited: $" + amount); 
+        } else { 
+            System.out.println("Invalid deposit amount."); 
+        } 
+    } 
+    @Override 
+    public void withdraw(double amount) { 
+        if (amount <= 0) { 
+            System.out.println("Invalid withdrawal amount."); 
+        } else if (amount > balance) { 
+            System.out.println("Insufficient balance."); 
+        } else { 
+            balance -= amount; 
+            System.out.println("Withdrawn: $" + amount); 
+        } 
+    } 
+    @Override 
+    public double checkBalance() { 
+        return balance; 
+    } 
+} 
+public class ATMDemo { 
+    public static void main(String[] args) { 
+        ATMService atm = new ATM(1000.0); 
+        atm.deposit(700); 
+        atm.withdraw(300); 
+        System.out.println("Current Balance: $" + atm.checkBalance());
+}
+}
+
+
